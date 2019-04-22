@@ -51,9 +51,9 @@ Please make sure you complete specs located in the following files. Additionally
 
 `tests/sequelize-test/model_test.js`
 
-We suggest you work on the Express tests before moving onto the Sequelize tests. Specifically, you will **need** to complete `tests/express-test/model_test.js` before moving onto `tests/express-test/route_test.js`. If you get stuck on a spec, you may skip it and come back to it later. However, the tests MAY depend on each other. 
+You should work on the Express tests before moving onto the Sequelize tests. Specifically for the Express tests, you will **need** to complete `tests/express-test/model_test.js` before moving onto `tests/express-test/route_test.js`. Otherwise, the tests will not work. If you get stuck on a spec, you may skip it and come back to it later. However, the tests MAY depend on each other. 
 
-Additionally, You'll be primarily working in the following files: 
+You will only be working in the following files: 
 
 **Express:**
 
