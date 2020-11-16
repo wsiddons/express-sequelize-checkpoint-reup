@@ -4,6 +4,11 @@ Firstly, don't stress out that we will be using this test to judge you in any wa
 
 Also, we ask that you don't help each other or cheat. Feel free to use any online resource but don't copy/paste answers to each other or if you find something similar online.
 
+## Introduction Video (Watch This First)
+
+[![Express-Sequelize: Getting Started](https://img.youtube.com/vi/KgniaenJsj0/0.jpg)](https://youtu.be/KgniaenJsj0)
+
+
 ## Resources
 
 The following resources are allowed:
