@@ -3,5 +3,5 @@ module.exports = {
   dialect: 'postgres',
   logging: false,
   password: process.env.DB_PASSWORD,
-  username: process.env.DB_USERNAME
-}
+  username: process.env.DB_USERNAME,
+};
