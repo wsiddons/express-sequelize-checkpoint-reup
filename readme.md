@@ -2,22 +2,22 @@
 
 Firstly, don't stress out that we will be using this test to judge you in any way except to understand how we can better help you.
 
-Also, we ask that you don't help each other or cheat.  Feel free to use any online resource but don't copy/paste answers to each other or if you find something similar online.
+Also, we ask that you don't help each other or cheat. Feel free to use any online resource but don't copy/paste answers to each other or if you find something similar online.
 
 ## Resources
 
 The following resources are allowed:
 
-* Any notes you've taken so far.
-* Any code you have in your previous projects.
-* learn.fullstackacademy.com.
-* All the slide decks that we've used in class.
+- Any notes you've taken so far.
+- Any code you have in your previous projects.
+- learn.fullstackacademy.com.
+- All the slide decks that we've used in class.
 
 ## Things we're testing
 
-* Express app architecture
-* Express routing
-* Sequelize model configuration
+- Express app architecture
+- Express routing
+- Sequelize model configuration
 
 ## Starting
 
@@ -42,7 +42,6 @@ it.only('does something', testFunc);
 
 ## Specs
 
-
 Please make sure you complete specs located in the following files. Additionally, make sure to change an `xit` to an `it` to change any given spec from pending to active:
 
 `tests/express-test/model_test.js`
@@ -51,9 +50,9 @@ Please make sure you complete specs located in the following files. Additionally
 
 `tests/sequelize-test/model_test.js`
 
-You should work on the Express tests before moving onto the Sequelize tests. Specifically for the Express tests, you will **need** to complete `tests/express-test/model_test.js` before moving onto `tests/express-test/route_test.js`. Otherwise, the tests will not work. If you get stuck on a spec, you may skip it and come back to it later. However, the tests MAY depend on each other. 
+You should work on the Express tests before moving onto the Sequelize tests. Specifically for the Express tests, you will **need** to complete `tests/express-test/model_test.js` before moving onto `tests/express-test/route_test.js`. Otherwise, the tests will not work. If you get stuck on a spec, you may skip it and come back to it later. However, the tests MAY depend on each other.
 
-You will only be working in the following files: 
+You will only be working in the following files:
 
 **Express:**
 

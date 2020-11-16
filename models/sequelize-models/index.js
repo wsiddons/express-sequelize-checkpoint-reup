@@ -1,5 +1,3 @@
-'use strict';
-
 const db = require('./database');
 const Sequelize = require('sequelize');
 
@@ -12,14 +10,14 @@ const Task = db.define('Task', {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      notEmpty: true
-    }
+      notEmpty: true,
+    },
   },
   complete: {
     type: Sequelize.BOOLEAN,
-    defaultValue: false
+    defaultValue: false,
   },
-  due: Sequelize.DATE
+  due: Sequelize.DATE,
 });
 
 const Owner = db.define('Owner', {
@@ -27,19 +25,18 @@ const Owner = db.define('Owner', {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      notEmpty: true
-    }
-  }
-})
+      notEmpty: true,
+    },
+  },
+});
 
-Task.belongsTo(Owner)
-Owner.hasMany(Task)
+Task.belongsTo(Owner);
+Owner.hasMany(Task);
 
 
 //---------^^^---------  your code above  ---------^^^----------
 
 module.exports = {
   Task,
-  Owner
+  Owner,
 };
-

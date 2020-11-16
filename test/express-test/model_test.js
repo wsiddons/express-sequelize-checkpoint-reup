@@ -1,26 +1,25 @@
 /* eslint-disable no-unused-expressions */
 
-var expect = require('chai').expect;
+const expect = require('chai').expect;
 
-var Todos = require('../../models/express-models/todos');
-describe('Todo model', function() {
-
+const Todos = require('../../models/express-models/todos');
+describe('Todo model', function () {
   // every test starts with a clean slate (see todos.js)
-  beforeEach(function() {
+  beforeEach(function () {
     Todos.reset();
   });
 
-  describe('`listPeople` and `add`', function() {
-    xit('initially returns an empty array', function() {
+  describe('`listPeople` and `add`', function () {
+    xit('initially returns an empty array', function () {
       expect(Todos.listPeople()).to.eql([]);
     });
 
-    xit('lists people after they have todos added', function() {
+    xit('lists people after they have todos added', function () {
       Todos.add('zeke', { content: 'clean room' });
       expect(Todos.listPeople()).to.eql(['zeke']);
     });
 
-    xit('handles multiple people with multiple todos', function(){
+    xit('handles multiple people with multiple todos', function () {
       Todos.add('zeke', { content: 'clean room' });
       Todos.add('zeke', { content: 'write mom' });
       expect(Todos.listPeople()).to.eql(['zeke']);
@@ -29,8 +28,8 @@ describe('Todo model', function() {
     });
   });
 
-  describe('`add` and `list`', function() {
-    xit('remembers who does what', function() {
+  describe('`add` and `list`', function () {
+    xit('remembers who does what', function () {
       Todos.add('zeke', { content: 'clean bath room' });
       expect(Todos.list('zeke')).to.have.length(1);
       Todos.add('omri', { content: 'clean living room' });
@@ -40,20 +39,20 @@ describe('Todo model', function() {
     });
   });
 
-  describe('`complete`', function() {
-    xit('is a boolean set to `false` for any new tasks', function() {
+  describe('`complete`', function () {
+    xit('is a boolean set to `false` for any new tasks', function () {
       Todos.add('zeke', { content: 'clean self' });
       expect(Todos.list('zeke')[0].complete).to.be.false;
     });
 
-    xit('respects a pre-existing completion status', function() {
+    xit('respects a pre-existing completion status', function () {
       Todos.add('zeke', { content: 'clean self', complete: true });
       Todos.add('zeke', { content: 'clean the world', complete: false });
       expect(Todos.list('zeke')[0].complete).to.be.true;
       expect(Todos.list('zeke')[1].complete).to.be.false;
     });
 
-    xit("is a method that sets a specified task's `complete` property to true", function() {
+    xit("is a method that sets a specified task's `complete` property to true", function () {
       Todos.add('zeke', { content: 'go to store' });
       Todos.add('zeke', { content: 'go to library' });
       Todos.add('zeke', { content: 'go to park' });
@@ -64,10 +63,10 @@ describe('Todo model', function() {
     });
   });
 
-  describe('`remove`', function() {
-    xit('removes a task, by index, for a given person', function() {
+  describe('`remove`', function () {
+    xit('removes a task, by index, for a given person', function () {
       // set up a bunch of tasks
-      for (var i = 0; i < 10; i++) Todos.add('zeke', { content: 'task ' + i });
+      for (let i = 0; i < 10; i++) Todos.add('zeke', { content: 'task ' + i });
       expect(Todos.list('zeke').length).to.equal(10);
       // use the method being tested
       Todos.remove('zeke', 5);
