@@ -10,7 +10,7 @@ describe('Todo routes', function () {
   });
 
   describe('`/users` URI', function () {
-    xit('GET responds with an empty array at first', function () {
+    it('GET responds with an empty array at first', function () {
       // when we make requests to `/users` we will get back an empty array
       return supertest // supertest object lets us make & test HTTP req/res
         .get('/users') // makes an HTTP request: GET '/users'
@@ -21,7 +21,7 @@ describe('Todo routes', function () {
         });
     });
 
-    xit('GET responds with a person after a task has been added', function () {
+    it('GET responds with a person after a task has been added', function () {
       todos.add('zeke', { content: 'a task' });
       return supertest
         .get('/users')
@@ -32,7 +32,7 @@ describe('Todo routes', function () {
         });
     });
 
-    xit('GET responds with everyone who has tasks', function () {
+    it('GET responds with everyone who has tasks', function () {
       todos.add('zeke', { content: 'a task' });
       todos.add('omri', { content: 'some other task' });
       todos.add('gabe', { content: 'yet more tasks' });
@@ -47,7 +47,7 @@ describe('Todo routes', function () {
   });
 
   describe('`/users/:name/tasks` URI', function () {
-    xit('GET lists all tasks for a specific user', function () {
+    it('GET lists all tasks for a specific user', function () {
       todos.add('dave', { content: 'task 1 for dave' });
       todos.add('joe', { content: 'task 1 for joe', complete: true });
       todos.add('joe', { content: 'task 2 for joe' });
@@ -64,7 +64,7 @@ describe('Todo routes', function () {
         });
     });
 
-    xit('POST creates a new task for that user & responds with the created task', function () {
+    it('POST creates a new task for that user & responds with the created task', function () {
       return supertest
         .post('/users/sarah/tasks')
         .send({ content: 'a new task for sarah' }) // the HTTP request body (remember to implement body parsing middleware)
@@ -83,7 +83,7 @@ describe('Todo routes', function () {
         });
     });
 
-    xit('POST respects pre-existing completion status', function () {
+    it('POST respects pre-existing completion status', function () {
       return supertest
         .post('/users/sarah/tasks')
         .send({ content: 'a new task for sarah', complete: true }) // the HTTP request body
@@ -102,40 +102,21 @@ describe('Todo routes', function () {
         });
     });
 
-    describe('Extra Credit: query filtering (?key=value)', function () {
-      beforeEach(function () {
-        todos.add('billy', { content: 'learn about req.query' });
-        todos.complete('billy', 0);
-        todos.add('billy', { content: 'enable requests for specific todos' });
+    describe('error handling', function () {
+      it('responds with a 404 if a user does not exist', function () {
+        return supertest.get('/users/obama/tasks').expect(404);
       });
 
-      xit('GET can get just the completed tasks', function () {
+      it('responds with a 400 if you attempt to add a todo without content', function () {
         return supertest
-          .get('/users/billy/tasks?status=complete')
-          .expect(200)
-          .expect('Content-Type', /json/)
-          .expect(function (res) {
-            expect(res.body).to.have.length(1);
-            expect(res.body[0].content).to.equal('learn about req.query');
-          });
-      });
-
-      xit('GET can get just the active (incomplete) tasks', function () {
-        return supertest
-          .get('/users/billy/tasks?status=active')
-          .expect(200)
-          .expect('Content-Type', /json/)
-          .expect(function (res) {
-            expect(res.body).to.have.length(1);
-            expect(res.body[0].content).to.equal(
-              'enable requests for specific todos'
-            );
-          });
+          .post('/users/bob/tasks')
+          .send({ content: '' })
+          .expect(400);
       });
     });
 
     describe('`/:index` URI', function () {
-      xit('PUT marks a specific task as complete', function () {
+      it('PUT marks a specific task as complete', function () {
         todos.add('nimit', { content: 't0' });
         todos.add('nimit', { content: 't1' });
         todos.add('nimit', { content: 't2' });
@@ -150,7 +131,7 @@ describe('Todo routes', function () {
           });
       });
 
-      xit('DELETE removes a specific task', function () {
+      it('DELETE removes a specific task', function () {
         todos.add('david', { content: 'interview fellows' });
         todos.add('david', { content: 'judge stackathon' });
         todos.add('david', { content: 'code review' });
@@ -167,17 +148,36 @@ describe('Todo routes', function () {
           });
       });
     });
-
-    describe('error handling', function () {
-      xit('responds with a 404 if a user does not exist', function () {
-        return supertest.get('/users/obama/tasks').expect(404);
+    
+    describe('Extra Credit: query filtering (?key=value)', function () {
+      beforeEach(function () {
+        todos.add('billy', { content: 'learn about req.query' });
+        todos.complete('billy', 0);
+        todos.add('billy', { content: 'enable requests for specific todos' });
       });
 
-      xit('responds with a 400 if you attempt to add a todo without content', function () {
+      it('GET can get just the completed tasks', function () {
         return supertest
-          .post('/users/bob/tasks')
-          .send({ content: '' })
-          .expect(400);
+          .get('/users/billy/tasks?status=complete')
+          .expect(200)
+          .expect('Content-Type', /json/)
+          .expect(function (res) {
+            expect(res.body).to.have.length(1);
+            expect(res.body[0].content).to.equal('learn about req.query');
+          });
+      });
+
+      it('GET can get just the active (incomplete) tasks', function () {
+        return supertest
+          .get('/users/billy/tasks?status=active')
+          .expect(200)
+          .expect('Content-Type', /json/)
+          .expect(function (res) {
+            expect(res.body).to.have.length(1);
+            expect(res.body[0].content).to.equal(
+              'enable requests for specific todos'
+            );
+          });
       });
     });
   });
