@@ -42,7 +42,7 @@ describe('Task and Owner', function () {
     });
 
     describe('clearCompleted', function () {
-      xit('removes all completed tasks from the database', async function () {
+      it('removes all completed tasks from the database', async function () {
         await Task.clearCompleted();
 
         const completedTasks = await Task.findAll({
@@ -58,7 +58,7 @@ describe('Task and Owner', function () {
     });
 
     describe('completeAll', function () {
-      xit('marks all incomplete tasks as completed', async function () {
+      it('marks all incomplete tasks as completed', async function () {
         await Task.completeAll();
 
         const completedTasks = await Task.findAll({
@@ -76,12 +76,12 @@ describe('Task and Owner', function () {
 
   describe('Instance methods on Task', function () {
     describe('getTimeRemaining', function () {
-      xit('returns the Infinity value if task has no due date', function () {
+      it('returns the Infinity value if task has no due date', function () {
         const task = Task.build();
         expect(task.getTimeRemaining()).to.equal(Infinity);
       });
 
-      xit('returns the difference between due date and now', function () {
+      it('returns the difference between due date and now', function () {
         const oneDay = 24 * 60 * 60 * 1000; // one day in milliseconds
 
         // create a task due one day from this point in time
@@ -94,14 +94,14 @@ describe('Task and Owner', function () {
     });
 
     describe('isOverdue', function () {
-      xit('is overdue if the due date is in the past', function () {
+      it('is overdue if the due date is in the past', function () {
         const task = Task.build({
           due: helper.dates.yesterday(),
         });
         expect(task.isOverdue()).to.be.true;
       });
 
-      xit('is not overdue if the due date is in the past but complete is true', function () {
+      it('is not overdue if the due date is in the past but complete is true', function () {
         const task = Task.build({
           due: helper.dates.yesterday(),
           complete: true,
@@ -109,7 +109,7 @@ describe('Task and Owner', function () {
         expect(task.isOverdue()).to.be.false;
       });
 
-      xit('is not overdue if the due date is in the future', function () {
+      it('is not overdue if the due date is in the future', function () {
         const task = Task.build({
           due: helper.dates.tomorrow(),
         });
@@ -124,7 +124,7 @@ describe('Task and Owner', function () {
         https://medium.com/@jasmine.esplago.munoz/feeling-the-magic-with-sequelize-magic-methods-e9cc89ecdcc5
       */
 
-      xit('should associate a task to an owner and return a promise', async function () {
+      it('should associate a task to an owner and return a promise', async function () {
         const task = await Task.create({ name: 'make pizza' });
         const owner = await Owner.create({ name: 'Priti' });
 
@@ -157,7 +157,7 @@ describe('Task and Owner', function () {
         https://sequelize.org/master/manual/eager-loading.html
       */
 
-      xit('returns all owners and includes their assigned tasks', async function () {
+      it('returns all owners and includes their assigned tasks', async function () {
         const ownersAndTasks = await Owner.getOwnersAndTasks();
         expect(ownersAndTasks).to.have.lengthOf(3);
         const ownersNames = ownersAndTasks.map((owner) => owner.name);
@@ -178,7 +178,7 @@ describe('Task and Owner', function () {
 
   describe('Instance methods on Owner', function () {
     describe('getIncompleteTasks', function () {
-      xit('returns all incomplete tasks assigned to an owner', async function () {
+      it('returns all incomplete tasks assigned to an owner', async function () {
         const taskData = [
           { name: 'get groceries', complete: true },
           { name: 'make dinner', complete: true },
@@ -229,7 +229,7 @@ describe('Task and Owner', function () {
     });
 
     describe('beforeDestroy Instance Hook', function () {
-      xit("attempting to destroy owners named 'Grace Hopper' throws an error", async function () {
+      it("attempting to destroy owners named 'Grace Hopper' throws an error", async function () {
         const graceHopper = await Owner.findOne({
           where: {
             name: 'Grace Hopper',
